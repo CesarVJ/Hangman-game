@@ -24,3 +24,38 @@ header{
     width: 100%;
     text-align: center;
 }
+
+footer{
+    background-color: var(--color3);
+    color: #fff;
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+}
+footer p {
+    font-size: 1.2rem;
+}
+.main-container{
+    width: 80vw;
+    height: 80vh;
+}
+#hangman{
+    height: 100%;
+}
+.hangman-container{
+    margin-top: 1rem;
+    height: 60%;
+    display: grid;
+    grid-template-columns: 1fr 0.6fr;
+}
+.parts{
+    stroke: var(--color1);
+    stroke-width: 5;
+}
+.head{
+    fill: none;
+}
+
+
