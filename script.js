@@ -29,7 +29,6 @@ const evaluateLetter = (letterEntered, targetWord) =>{
             wrongLetters.push(letterEntered);
             wrongLettersBox.textContent += letterEntered+", ";
         }
-
     }else{
         let matchedLetter = document.getElementById(indexOfLetter);
         matchedLetter.style.opacity = 1;
