@@ -1,11 +1,15 @@
-
+let selectedWord ="";
+const wrongLetters = [];
+const wrongLettersBox = document.getElementById("wrong-letters");
 const drawWord = word =>{
     word = Array.from(word);
     const wordContainer = document.querySelector(".word");
+    let count = 0;
     for(let letter of word){
         let letterContainer = document.createElement("div");
-        letterContainer.innerHTML = `<p class="letter">${letter}</p>`
+        letterContainer.innerHTML = `<p id="${count}" class="letter">${letter}</p>`
         wordContainer.appendChild(letterContainer);
+        count++;
     }
 }
 function getWord(){
@@ -13,14 +17,24 @@ function getWord(){
     .then(response => response.json())
     .then(words =>{
         let totalWords = words.length;
-        let selectedWord = words[Math.floor(Math.random() * totalWords)].word;
+        selectedWord = words[Math.floor(Math.random() * totalWords)].word;
         drawWord(selectedWord);
-    });
+    }).catch(err => console.error(err));
 }
 
-const evaluateLetter = letterEntered =>{
-    console.log(letterEntered);
+const evaluateLetter = (letterEntered, targetWord) =>{
+    let indexOfLetter = targetWord.indexOf(letterEntered);
+    if( indexOfLetter == -1){
+        if(!wrongLetters.includes(letterEntered)){
+            wrongLetters.push(letterEntered);
+            wrongLettersBox.textContent += letterEntered+", ";
+        }
+
+    }else{
+        let matchedLetter = document.getElementById(indexOfLetter);
+        matchedLetter.style.opacity = 1;
+    }
 }
 
 getWord();
-window.addEventListener('keypress',event => evaluateLetter(String.fromCharCode(event.charCode)));
+window.addEventListener('keypress',event => evaluateLetter(String.fromCharCode(event.charCode), selectedWord));
