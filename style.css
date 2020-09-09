@@ -53,9 +53,12 @@ footer p {
     display: grid;
     grid-template-columns: 1fr 0.6fr;
 }
-.parts{
+.draw{
     stroke: var(--color1);
     stroke-width: 5;
+}
+.body-parts{
+    opacity: 0;
 }
 .head{
     fill: none;

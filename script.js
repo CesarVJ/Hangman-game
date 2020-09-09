@@ -1,13 +1,15 @@
 let selectedWord ="";
+let attempts = 0;
 const wrongLetters = [];
 const wrongLettersBox = document.getElementById("wrong-letters");
+
 const drawWord = word =>{
     word = Array.from(word);
     const wordContainer = document.querySelector(".word");
     let count = 0;
     for(let letter of word){
         let letterContainer = document.createElement("div");
-        letterContainer.innerHTML = `<p id="${count}" class="letter">${letter}</p>`
+        letterContainer.innerHTML = `<p id="letter-${count}" class="letter">${letter}</p>`
         wordContainer.appendChild(letterContainer);
         count++;
     }
@@ -20,19 +22,23 @@ function getWord(showDefinition){
         selectedWord = words[Math.floor(Math.random() * totalWords)].word;
         drawWord(selectedWord);
         showDefinition(selectedWord)
-
     }).catch(err => console.error(err));
 }
-
+function showBodyPart(){
+    let bodyPart = document.getElementById(attempts);
+    bodyPart.style.opacity = 1;
+}
 const evaluateLetter = (letterEntered, targetWord) =>{
     let indexOfLetter = targetWord.indexOf(letterEntered);
     if( indexOfLetter == -1){
         if(!wrongLetters.includes(letterEntered)){
             wrongLetters.push(letterEntered);
             wrongLettersBox.textContent += letterEntered+", ";
+            attempts++;
+            showBodyPart();
         }
     }else{
-        let matchedLetter = document.getElementById(indexOfLetter);
+        let matchedLetter = document.getElementById(`letter-${indexOfLetter}`);
         matchedLetter.style.opacity = 1;
     }
 }

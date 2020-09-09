@@ -13,27 +13,27 @@
         <div class="hangman-container">
             <svg id="hangman">
                 
-                <line class="parts" x1="20" y1 = "30" x2="20" y2="270"/>
-                <line class="parts" x1="20" y1 = "30" x2="100" y2="30"/>
-                <line class="parts" x1="0" y1 = "270" x2="50" y2="270"/>
+                <line class="draw" x1="20" y1 = "30" x2="20" y2="270"/>
+                <line class="draw" x1="20" y1 = "30" x2="100" y2="30"/>
+                <line class="draw" x1="0" y1 = "270" x2="50" y2="270"/>
 
-                <line class="parts" x1="100" y1 = "60" x2="100" y2="30"/>
+                <line class="draw" x1="100" y1 = "60" x2="100" y2="30"/>
 
                 <!-- Hangman body-->
-                <circle class="head parts" cx="100" cy="85" r="25"/>
-                <line class="body parts" x1="100" y1 = "110" x2="100" y2="200"/>
+                <circle id="1" class="head body-parts draw" cx="100" cy="85" r="25"/>
+                <line id="2" class="body body-parts draw" x1="100" y1 = "110" x2="100" y2="200"/>
 
                 <!-- Arms -->
-                <line class="body parts" x1="100" y1 = "130" x2="150" y2="120"/>
-                <line class="body parts" x1="100" y1 = "130" x2="50" y2="120"/>
+                <line id="3" class="left-arm body-parts draw" x1="100" y1 = "130" x2="150" y2="120"/>
+                <line id="4" class="right-arm body-parts draw" x1="100" y1 = "130" x2="50" y2="120"/>
 
                 <!-- Legs -->
-                <line class="body parts" x1="100" y1 = "200" x2="150" y2="240"/>
-                <line class="body parts" x1="100" y1 = "200" x2="50" y2="240"/>
+                <line id="5" class="left-leg body-parts draw" x1="100" y1 = "200" x2="150" y2="240"/>
+                <line id="6" class="right-leg body-parts draw" x1="100" y1 = "200" x2="50" y2="240"/>
 
             </svg>
             <div class="errors">
-                <h3>Remaining attempts: <span>7</span></h3>
+                <h3>Remaining attempts: <span>6</span></h3>
                 <p>Wrong letters: <span id="wrong-letters"></span></p>
             </div>
         </div>
