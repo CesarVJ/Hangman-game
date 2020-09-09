@@ -82,3 +82,8 @@ footer p {
     font-style: italic;
     color: #ff4b5c;
 }
+.definition span{
+    color: var(--color2);
+    font-weight: bold;
+    font-style: italic;
+}

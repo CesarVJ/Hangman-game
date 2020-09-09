@@ -12,13 +12,15 @@ const drawWord = word =>{
         count++;
     }
 }
-function getWord(){
+function getWord(showDefinition){
     fetch("https://api.datamuse.com/words?rel_trg=software")
     .then(response => response.json())
     .then(words =>{
         let totalWords = words.length;
         selectedWord = words[Math.floor(Math.random() * totalWords)].word;
         drawWord(selectedWord);
+        showDefinition(selectedWord)
+
     }).catch(err => console.error(err));
 }
 
@@ -34,6 +36,15 @@ const evaluateLetter = (letterEntered, targetWord) =>{
         matchedLetter.style.opacity = 1;
     }
 }
+function getDefinition(word){
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+    .then(response => response.json())
+    .then(definitions => {
+        let definition = definitions[0].meanings[0].definitions[0].definition;
+        let definitionBox = document.querySelector(".definition");
+        definitionBox.innerHTML = `<span>Definition:</span> ${definition}`;        
+    }).catch(err => console.error(err));
+}
+getWord(getDefinition);
 
-getWord();
 window.addEventListener('keypress',event => evaluateLetter(String.fromCharCode(event.charCode), selectedWord));
