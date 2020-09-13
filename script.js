@@ -22,24 +22,39 @@ function getWord(showDefinition){
         selectedWord = words[Math.floor(Math.random() * totalWords)].word;
         drawWord(selectedWord);
         showDefinition(selectedWord)
+        console.log(selectedWord);
     }).catch(err => console.error(err));
 }
 function showBodyPart(){
     let bodyPart = document.getElementById(attempts);
     bodyPart.style.opacity = 1;
 }
+function getIndexes(letter, wordLetters){
+    let indexes = [];
+    let i = -1;
+    while((i = wordLetters.indexOf(letter, i+1)) != -1){
+        indexes.push(i);
+    }
+    return indexes;
+}
 const evaluateLetter = (letterEntered, targetWord) =>{
-    let indexOfLetter = targetWord.indexOf(letterEntered);
-    if( indexOfLetter == -1){
+    let indexes = getIndexes(letterEntered, Array.from(targetWord));
+    
+    if( indexes.length == 0){
         if(!wrongLetters.includes(letterEntered)){
             wrongLetters.push(letterEntered);
             wrongLettersBox.textContent += letterEntered+", ";
             attempts++;
             showBodyPart();
+        }else{
+            // Show message of Letter previous entered
         }
     }else{
-        let matchedLetter = document.getElementById(`letter-${indexOfLetter}`);
-        matchedLetter.style.opacity = 1;
+        indexes.forEach(index =>{
+            let matchedLetter = document.getElementById(`letter-${index}`);
+            matchedLetter.style.opacity = 1;
+        });
+
     }
 }
 function getDefinition(word){
