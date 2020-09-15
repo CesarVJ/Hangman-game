@@ -37,9 +37,24 @@ function getIndexes(letter, wordLetters){
     }
     return indexes;
 }
+const checkPlayable = () =>{
+    let resultBox = document.querySelector(".results-container");
+    let messageElement = document.querySelector(".results > p");
+    let actualWord = Array.from(document.querySelectorAll(".word > div > p")).filter(letter => letter.style.opacity==1).map(letter => letter.textContent).join('');
+    console.log(actualWord);
+    if(attempts >= 6){
+        messageElement.textContent = `You have lost!`;
+        resultBox.style.visibility = "visible";
+        return false;
+    }else if(actualWord === selectedWord){
+        messageElement.textContent = `Congratulations, You Won!`;
+        resultBox.style.visibility = "visible";
+        return false;
+    }
+    return true;
+}
 const evaluateLetter = (letterEntered, targetWord) =>{
     let indexes = getIndexes(letterEntered, Array.from(targetWord));
-    
     if( indexes.length == 0){
         if(!wrongLetters.includes(letterEntered)){
             wrongLetters.push(letterEntered);
@@ -54,8 +69,8 @@ const evaluateLetter = (letterEntered, targetWord) =>{
             let matchedLetter = document.getElementById(`letter-${index}`);
             matchedLetter.style.opacity = 1;
         });
-
     }
+    let playable = checkPlayable();
 }
 function getDefinition(word){
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
