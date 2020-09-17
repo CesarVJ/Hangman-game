@@ -140,6 +140,25 @@ footer p {
 .results > button:focus{
     transform: scale(1);
 }
+/* Keyboard seaction*/
+.keyboard{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+.letter-button{
+    background-color: var(--color1);
+    color: var(--color4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 8%;
+    height: 30px;
+    margin: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 
 @-webkit-keyframes puff-in-center {
